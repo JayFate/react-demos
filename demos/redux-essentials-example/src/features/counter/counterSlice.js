@@ -61,9 +61,10 @@ export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 // console.log(counterSlice.actions.increment({ test: 1 }));
 // {type:"counter/increment",payload:{test:1}}
 
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
+// selector 函数允许我们从 state 中获取值
+// selector 函数也可以在使用的地方内联的方式定义
+// 而不是仅仅只能在 slice 文件中。例如 :
+// `useSelector((state) => state.counter.value)`
 export const selectCount = (state) => state.counter.value;
 
 // We can also write thunks by hand, which may contain both sync and async logic.

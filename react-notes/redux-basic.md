@@ -112,6 +112,17 @@ console.log(currentValue)
 // 2
 ```
 
+组件不能直接与 redux store 对话，因为组件中不能引入 store。`useSelector` 负责为我们在幕后与 redux store 对话。 如果我们传入一个 selector 函数，`useSelector`  会为我们调用 `someSelector(store.getState())`，并返回结果。
+
+```js
+// useSelector 接受的是 selector 函数
+const countPlusTwo = useSelector(state => state.counter.value + 2)
+```
+
+每次 dispatch action 并更新 redux store 时，`useSelector` 将重新 selector 函数。如果 selector 函数返回的值与上次不同，`useSelector` 将确保组件使用新值重新渲染。
+
+ `useSelector` 或 `useDispatch` 的使用的 state 来源于 `<Provider>` 中的 store。
+
 ### redux 数据流
 
 早些时候，我们谈到了“单向数据流”，它描述了更新应用程序的以下步骤序列：
@@ -187,3 +198,22 @@ store.dispatch(incrementAsync1(5))
 ```
 
 调用 `dispatch()` 可以传入普通 action 对象, 函数或 Promise。
+
+#### useDispatch
+
+使用 `useDispatch` hooks 可以在同步或异步代码中 dispatch action。
+
+```js
+const dispatch = useDispatch()
+```
+
+`features/counter/Counter.js`
+
+```jsx
+<button onClick={() => dispatch(increment())}> + </button>
+```
+
+
+
+
+
