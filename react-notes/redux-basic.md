@@ -13,7 +13,7 @@ const addTodoAction = {
 
 #### actionCreator
 
-**actionCreator** 是一个创建并返回一个 action 对象的函数, 用于每次都手动编写 action 对象.
+**actionCreator** 是一个创建并返回一个 action 对象的函数, 用于避免每次都手动编写 action 对象.
 
 ```js
 const addTodo = text => {
@@ -79,25 +79,14 @@ const store = configureStore({ reducer: counterReducer })
 console.log(store.getState())
 // {value: 0}
 
-store.dispatch({ type: 'counter/increment' })
-
-console.log(store.getState())
-// {value: 1}
-```
-
-我们通常调用 actionCreator 来创建 action：
-
-```js
+// 我们通常调用 actionCreator 来创建 action
 const increment = () => {
-  return {
-    type: 'counter/increment'
-  }
+  return { type: 'counter/increment' }
 }
-
 store.dispatch(increment())
 
 console.log(store.getState())
-// {value: 2}
+// {value: 1}
 ```
 
 #### selector
@@ -119,7 +108,7 @@ console.log(currentValue)
 const countPlusTwo = useSelector(state => state.counter.value + 2)
 ```
 
-每次 dispatch action 并更新 redux store 时，`useSelector` 将重新 selector 函数。如果 selector 函数返回的值与上次不同，`useSelector` 将确保组件使用新值重新渲染。
+每次 dispatch action 并更新 redux store 时，`useSelector` 将重新执行 selector 函数。如果 selector 函数返回的值与上次不同，`useSelector` 将确保组件使用新值重新渲染。
 
  `useSelector` 或 `useDispatch` 的使用的 state 来源于 `<Provider>` 中的 store。
 
@@ -175,9 +164,9 @@ export default configureStore({
 
 ```js
 // 下面这个函数就是一个 thunk ，它使我们可以执行异步逻辑
-// 你可以 dispatched 异步 action `dispatch(incrementAsync(10))` 就像一个常规的 action
+// 你可以 dispatch 异步 action `dispatch(incrementAsync(10))` 就像一个常规的 action
 // 调用 thunk 时接受 `dispatch` 函数作为第一个参数
-// 当异步代码执行完毕时，可以 dispatched actions
+// 当异步代码执行完毕时，可以 dispatch actions
 
 // 外部的 thunk creator 工厂函数
 export const incrementAsync1 = (amount) => {
@@ -185,13 +174,14 @@ export const incrementAsync1 = (amount) => {
   return (dispatch) => {
     // thunk 内可以发起异步数据请求
     setTimeout(() => {
+      // incrementByAmount 是一个同步的 actionCreator
       dispatch(incrementByAmount(amount));
     }, 1000);
   };
 };
 ```
 
-我们可以像使用普通 Redux actionCreator 一样使用它们：
+我们可以像使用普通 redux actionCreator 一样使用它们：
 
 ```js
 store.dispatch(incrementAsync1(5))
