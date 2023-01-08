@@ -1,4 +1,5 @@
 import React from 'react';
+// react-dom@18
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './app/store';

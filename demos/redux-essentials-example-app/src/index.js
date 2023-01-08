@@ -1,4 +1,5 @@
 import React from 'react'
+// react-dom@17
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
