@@ -157,3 +157,33 @@ export default configureStore({
 ```
 
 例子中，`state.users`，`state.posts`，和 `state.comments` 均是 redux state 的一个 独立的 “slice”。由于 `usersReducer` 负责更新 `state.users` slice，我们将其称为 “slice reducer” 函数。
+
+### 使用 thunk 编写异步逻辑
+
+`features/counter/counterSlice.js`
+
+```js
+// 下面这个函数就是一个 thunk ，它使我们可以执行异步逻辑
+// 你可以 dispatched 异步 action `dispatch(incrementAsync(10))` 就像一个常规的 action
+// 调用 thunk 时接受 `dispatch` 函数作为第一个参数
+// 当异步代码执行完毕时，可以 dispatched actions
+
+// 外部的 thunk creator 工厂函数
+export const incrementAsync1 = (amount) => {
+  // 内部的 thunk 函数
+  return (dispatch) => {
+    // thunk 内可以发起异步数据请求
+    setTimeout(() => {
+      dispatch(incrementByAmount(amount));
+    }, 1000);
+  };
+};
+```
+
+我们可以像使用普通 Redux actionCreator 一样使用它们：
+
+```js
+store.dispatch(incrementAsync1(5))
+```
+
+调用 `dispatch()` 可以传入普通 action 对象, 函数或 Promise。
