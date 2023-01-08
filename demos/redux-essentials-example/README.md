@@ -39,6 +39,22 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+### 应用目录
+
+你已经知道了应用的功能，现在看一下代码实现。
+
+以下是构成此应用程序的关键文件：
+
+- `/src`
+  - `index.js`: app 入口
+  - `App.js`: 顶级 React 组件
+  - `/app`
+    - `store.js`: 创建 Redux store 实例
+  - `/features`
+    - `/counter`
+      - `Counter.js`: 展示 counter 特性的 React 组件
+      - `counterSlice.js`: counter 特性相关的 redux 逻辑
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).

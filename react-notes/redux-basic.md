@@ -134,3 +134,26 @@ console.log(currentValue)
   - store 通知所有订阅过的视图，通知它们 store 发生更新
   - 每个订阅过 store 数据的视图 组件都会检查它们需要的 state 部分是否被更新。
   - 发现数据被更新的每个组件都强制使用新数据重新渲染，紧接着更新网页
+
+#### redux slice
+
+“slice” 是应用中**单个功能**的 redux reducer 逻辑和 action 的集合, 通常一起定义在一个文件中。该名称来自于将根 redux 状态对象拆分为多个状态 “slice”。
+
+比如，在一个博客应用中，store 的配置大致长这样：
+
+```js
+import { configureStore } from '@reduxjs/toolkit'
+import usersReducer from '../features/users/usersSlice'
+import postsReducer from '../features/posts/postsSlice'
+import commentsReducer from '../features/comments/commentsSlice'
+
+export default configureStore({
+  reducer: {
+    users: usersReducer,
+    posts: postsReducer,
+    comments: commentsReducer
+  }
+})
+```
+
+例子中，`state.users`，`state.posts`，和 `state.comments` 均是 redux state 的一个 独立的 “slice”。由于 `usersReducer` 负责更新 `state.users` slice，我们将其称为 “slice reducer” 函数。
