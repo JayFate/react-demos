@@ -8,13 +8,21 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = [
   { id: '1', title: 'First Post!', content: 'Hello!' },
-  { id: '2', title: 'Second Post', content: 'More text' }
+  { id: '2', title: 'Second Post', content: 'More text' },
 ]
 
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {}
+  reducers: {
+    // state 本 slice 的局部 state，而不是整个 redux 应用的 store
+    // createSlice 会为 postAdded reducer 函数生成一个同名的 actionCreator 函数
+    postAdded(state, action) {
+      state.push(action.payload)
+    },
+  },
 })
+
+export const { postAdded } = postsSlice.actions
 
 export default postsSlice.reducer
