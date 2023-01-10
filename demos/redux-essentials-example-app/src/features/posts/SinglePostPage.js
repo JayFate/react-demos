@@ -1,13 +1,14 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 export const SinglePostPage = ({ match }) => {
   const { postId } = match.params
 
   // 每当 useSelector 返回的值为新引用时，组件就会重新渲染
   // 所以 useSelector 不要返回多余的数据，以免引起组件不必要的重新渲染
-  const post = useSelector(state =>
-    state.posts.find(post => post.id === postId)
+  const post = useSelector((state) =>
+    state.posts.find((post) => post.id === postId)
   )
 
   if (!post) {
@@ -23,6 +24,9 @@ export const SinglePostPage = ({ match }) => {
       <article className="post">
         <h2>{post.title}</h2>
         <p className="post-content">{post.content}</p>
+        <Link to={`/editPost/${post.id}`} className="button">
+          Edit Post
+        </Link>
       </article>
     </section>
   )
