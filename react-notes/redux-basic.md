@@ -112,6 +112,10 @@ const countPlusTwo = useSelector(state => state.counter.value + 2)
 
  `useSelector` 或 `useDispatch` 的使用的 state 来源于 `<Provider>` 中的 store。
 
+#### useSelector
+
+用于从 redux store 读取数据
+
 ### redux 数据流
 
 早些时候，我们谈到了“单向数据流”，它描述了更新应用程序的以下步骤序列：
