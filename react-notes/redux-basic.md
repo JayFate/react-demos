@@ -164,6 +164,8 @@ export default configureStore({
 
 ### 使用 thunk 编写异步逻辑
 
+"thunk" 这个词是一个编程术语，意思是 ["一段做延迟工作的代码"](https://en.wikipedia.org/wiki/Thunk). 
+
 `features/counter/counterSlice.js`
 
 ```js
@@ -206,8 +208,3 @@ const dispatch = useDispatch()
 ```jsx
 <button onClick={() => dispatch(increment())}> + </button>
 ```
-
-
-
-
-
